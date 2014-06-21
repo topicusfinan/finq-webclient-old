@@ -1,81 +1,54 @@
-<div class="header">
-  <ul>
-    <li>Run</li>
-    <li>Build</li>
-    <li>Configure</li>
-  </ul>
-
-</div>
-
-<div class="selector">
-  <div class="module">
-    <span class="module_header">Collection</span>
-    <div>
-      <span class="collection_label">All Collections</span>
+<div class="row">
+  <div class="col-md-2">
+    <div class="module">
+      <span class="module_header">Collection</span>
+      <div>
+        <span class="collection_label">All Collections</span>
+      </div>
+      <div>
+        <span class="collection_label">Wehkamp Finance</span>
+        <ul>
+          <li>All Collections</li>
+          <li class="li_selected">All suites</li>
+          <li>Regression</li>
+          <li>Nightly</li>
+        </ul>
+      </div>
+      <div class="collection_label">
+        <span class="collection_label">Money@home B.V.</span>
+      </div>
+      <div class="collection_label">
+        <span class="collection_label">Obvion</span>
+      </div>
     </div>
-
-    <div>
-      <span class="collection_label">Wehkamp Finance</span>
-      <ul>
-        <li>All Collections</li>
-        <li class="li_selected">All suites</li>
-        <li>Regression</li>
-        <li>Nightly</li>
-      </ul>
+    <div class="module">
+      <span class="module_header">Environment</span>
     </div>
-
-    <div class="collection_label">
-      <span class="collection_label">Money@home B.V.</span>
-    </div>
-
-    <div class="collection_label">
-      <span class="collection_label">Obvion</span>
-    </div>
-
   </div>
-
-  <div class="module">
-    <span class="module_header">Environment</span>
-  </div>
-
-</div>
-
-<div class="selected">
-
-  <span ng-init="loadStories()">
+  <div class="col-md-8" ng-init="loadStories()">
     <div ng-repeat="story in stories">
-      <h2>{{story.name}}</h2>
-      <div ng-repeat="scenario in story.scenarios">
-
-          <h4>{{scenario.title}}</h4><br>
+      <div class="story-name">
+        <span id="{{story.id}}">{{story.name}}</span>
+        <div class="pull-right">
+          <a href ng-click="runStory(story.id)">Run all</a>
+        </div>
+      </div>
+      <accordion close-other="true">
+        <accordion-group ng-repeat="scenario in story.scenarios" heading="{{scenario.title}}">
           {{scenario.steps}}
-
-       </div>
-       </div>
+        </accordion-group>
+      </accordion>
     </div>
-  </span>
-
-
-
-  <button ng-click='submitStories()'>Run All</button>
-
-
+  </div>
+  <div class="col-md-2">
+    <!-- <ul ng-repeat="story in stories" class-"nav bs-sidenav" bs-scrollspy-list>
+      <li>
+        <a href="#{{story.id}}">{{story.name}}</a>
+        <ul class="nav" ng-repeat="scenario in story.scenarios">
+          <li><a href="#{{story.id}}-{{scenario.id}}">{{scenario.title}}</a></li>
+        </ul>
+      </li>
+    </ul> -->
+  </div>
 </div>
-
-<div class="overview">
-  <ul>
-    <li>Customers</li>
-    <li>Financial Transactions</li>
-    <li>Orders</li>
-    <li>Payments</li>
-    <li>Internal</li>
-    <li>Manual</li>
-    <li>Matching</li>
-    <li>Products</li>
-    <li>Jobs</li>
-    <li>UI</li>
-  </ul>
-
-</div>
-
 
