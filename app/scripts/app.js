@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 angular.module('jbehaveWebApp', ['ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap']).config(function($routeProvider) {
   return $routeProvider.when('/', {
     templateUrl: 'views/main.html',
