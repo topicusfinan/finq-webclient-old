@@ -7,11 +7,11 @@
       </div>
       <div>
         <span class="collection_label">Wehkamp Finance</span>
-        <ul>
-          <li>All Collections</li>
-          <li class="li_selected">All suites</li>
-          <li>Regression</li>
-          <li>Nightly</li>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#">All Collections</a></li>
+          <li class="active"><a href="#">All suites</a></li>
+          <li><a href="#">Regression</a></li>
+          <li><a href="#">Nightly</a></li>
         </ul>
       </div>
       <div class="collection_label">
@@ -28,14 +28,16 @@
   <div class="col-md-8" ng-init="loadStories()">
     <div ng-repeat="story in stories">
       <div class="story-name">
-        <span id="{{story.id}}">{{story.name}}</span>
+        <span id="{{story.id}}">{{story.name}}</span> - <span class="text-muted">{{story.status}}</span>
         <div class="pull-right">
           <a href ng-click="runStory(story.id)">Run all</a>
         </div>
       </div>
       <accordion close-other="true">
-        <accordion-group ng-repeat="scenario in story.scenarios" heading="{{scenario.title}}">
-          {{scenario.steps}}
+        <accordion-group ng-repeat="scenario in story.scenarios" heading="{{scenario.title}}" id="{{scenario.id}}">
+          <ul>
+            <li ng-repeat="line in scenario.steps">{{line}}</li>
+          </ul>
         </accordion-group>
       </accordion>
     </div>
