@@ -1,0 +1,59 @@
+.paper-group {
+  width: 100%;
+  position: relative;
+}
+.paper-group .paper {
+  height: 300px;
+  position: absolute;
+  width: 100%;
+  box-shadow: inset 5px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  padding: 15px;
+  color: #fff;
+}
+.paper-group .paper.done {
+  width: 200px;
+}
+.paper-group .paper.paper-one {
+  background-color: #00275d;
+  z-index: 3;
+}
+.paper-group .paper.paper-two {
+  background-color: #00aeef;
+  z-index: 2;
+  padding-left: 215px;
+}
+.paper-group .paper.paper-two.done {
+  width: 415px;
+}
+.paper-group .paper.paper-three {
+  background-color: #5bbf90;
+  z-index: 1;
+  padding-left: 430px;
+}
+.paper-group .paper.paper-three.done {
+  width: 615px;
+}
+
+.done-true {
+  color: green;
+}
+
+.story-name {
+  border-bottom: 1px solid gray;
+}
+
+.story-name span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+.sidebar-menu li ul {
+  margin-left: 15px;
+}

@@ -1,56 +1,64 @@
-<div class="row">
-  <div class="col-md-2">
-    <div class="module">
-      <span class="module_header">Collection</span>
-      <div>
-        <span class="collection_label">All Collections</span>
-      </div>
-      <div>
-        <span class="collection_label">Wehkamp Finance</span>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="#">All Collections</a></li>
-          <li class="active"><a href="#">All suites</a></li>
-          <li><a href="#">Regression</a></li>
-          <li><a href="#">Nightly</a></li>
-        </ul>
-      </div>
-      <div class="collection_label">
-        <span class="collection_label">Money@home B.V.</span>
-      </div>
-      <div class="collection_label">
-        <span class="collection_label">Obvion</span>
-      </div>
-    </div>
-    <div class="module">
-      <span class="module_header">Environment</span>
-    </div>
-  </div>
-  <div class="col-md-8" ng-init="loadStories()">
-    <div ng-repeat="story in stories">
-      <div class="story-name">
-        <span id="{{story.id}}">{{story.name}}</span> - <span class="text-muted">{{story.status}}</span>
-        <div class="pull-right">
-          <a href ng-click="runStory(story.id)">Run all</a>
-        </div>
-      </div>
-      <accordion close-other="true">
-        <accordion-group ng-repeat="scenario in story.scenarios" heading="{{scenario.title}}" id="{{scenario.id}}">
-          <ul>
-            <li ng-repeat="line in scenario.steps">{{line}}</li>
-          </ul>
-        </accordion-group>
-      </accordion>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <!-- <ul ng-repeat="story in stories" class-"nav bs-sidenav" bs-scrollspy-list>
-      <li>
-        <a href="#{{story.id}}">{{story.name}}</a>
-        <ul class="nav" ng-repeat="scenario in story.scenarios">
-          <li><a href="#{{story.id}}-{{scenario.id}}">{{scenario.title}}</a></li>
-        </ul>
-      </li>
-    </ul> -->
-  </div>
-</div>
+<div class="paper-group">
+  <div class="paper paper-one done">
 
+  <h3>Domains</h3>
+
+  <div class="list-group">
+      
+        <a href="#" class="list-group-item active">Lacent <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+
+        <a href="#" class="list-group-item">ING <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+
+        <a href="#" class="list-group-item">ABN AMRO <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+  </div>
+
+  </div>
+
+  <div class="paper paper-two done">
+
+
+  <h3>Stories</h3>
+
+    <div class="list-group">
+
+
+
+          <a href class="list-group-item active" ng-click="scenarioFilter = null">All <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+        
+          <a href class="list-group-item" ng-repeat="story in stories" data-ng-click="setFilter()">{{story.id}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+
+          <a href class="list-group-item" ng-click="scenarioFilter = '46432626'">herpelderp</a>
+
+    </div>
+    
+    
+
+  </div>
+
+  <div class="paper paper-three">
+
+
+
+    
+
+
+    <h3>Scenarios</h3>
+
+      
+    
+
+      <div ng-repeat="story in stories | filter:scenarioFilter:strict" id="{{story.id}}">
+
+      <span>{{story.name}}</span>
+        <div class="list-group">
+
+          <a href="#" class="list-group-item" ng-repeat="scenario in story.scenarios" id="{{scenario.id}}">{{scenario.title}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+
+        </div>
+
+      </div>
+    
+
+  </div>
+
+</div>
