@@ -15,3 +15,26 @@
 .sidebar-menu li ul {
     margin-left: 15px;
 }
+
+.paper {
+    h3 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+.list-group {
+    .list-group-item {
+        border-radius: 0px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &.circles {
+        .list-group-item {
+            border-radius: 50px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    }
+}

@@ -1,15 +1,14 @@
-<div class="paper-group">
   <div class="paper paper-one done">
 
   <h3>Domains</h3>
 
-  <div class="list-group">
+  <div class="list-group circles">
       
-        <a href="#" class="list-group-item active">Lacent <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+        <a href="#" class="list-group-item active">LAC</a>
 
-        <a href="#" class="list-group-item">ING <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+        <a href="#" class="list-group-item">ING</a>
 
-        <a href="#" class="list-group-item">ABN AMRO <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+        <a href="#" class="list-group-item">ABN</a>
   </div>
 
   </div>
@@ -17,17 +16,11 @@
   <div class="paper paper-two done">
 
 
-  <h3>Stories</h3>
+    <h3>Bundles</h3>
 
     <div class="list-group">
 
-
-
-          <a href class="list-group-item active" ng-click="scenarioFilter = null">All <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-        
-          <a href class="list-group-item" ng-repeat="story in stories" data-ng-click="setFilter()">{{story.id}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-
-          <a href class="list-group-item" ng-click="scenarioFilter = '46432626'">herpelderp</a>
+          <a href class="list-group-item" ng-repeat="bundle in bundles" class="active">{{bundle.name}}</a>
 
     </div>
     
@@ -35,7 +28,26 @@
 
   </div>
 
-  <div class="paper paper-three">
+  <div class="paper paper-three" ng-class="isDone">
+
+
+    <h3>Stories</h3>
+
+    <div class="list-group">
+
+
+
+          <a href class="list-group-item" data-ng-click="setFilter(null, -1)" ng-class="{active: selectedIndex===-1}">All</a>
+        
+          <a href class="list-group-item" ng-repeat="story in stories" data-ng-click="setFilter(story.name, $index)" ng-class="{active: $index===selectedIndex}">{{story.name}}</a>
+
+    </div>
+    
+    
+
+  </div>
+
+  <div class="paper paper-four">
 
 
 
@@ -44,21 +56,36 @@
 
     <h3>Scenarios</h3>
 
-      
-    
-
-      <div ng-repeat="story in stories | filter:scenarioFilter:strict" id="{{story.id}}">
-
-      <span>{{story.name}}</span>
-        <div class="list-group">
-
-          <a href="#" class="list-group-item" ng-repeat="scenario in story.scenarios" id="{{scenario.id}}">{{scenario.title}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-
-        </div>
-
+      <div class="form-group">
+        <input type="search" class="form-control" ng-model="scenarioFilter" placeholder="Zoeken binnen scenario('s)" />
       </div>
+      <accordion close-others="oneAtATime" ng-animate="'animate'" ng-repeat="story in stories | filter:scenarioFilter" id="{{story.id}}">
+
+        <div class="row">
+          <div class="col-xs-9">
+            <h4>{{story.name}}</h4>
+          </div>
+          <div class="col-xs-3 text-right">
+
+              <button class="btn btn-default"><span class="glyphicon glyphicon-play"></span> Play story</button>
+
+          </div>
+        </div>
+        
+        <accordion-group ng-repeat="scenario in story.scenarios" id="{{scenario.id}}"  is-open="status.open">
+          <accordion-heading>
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> {{scenario.title}} 
+            <a class="pull-right">Play scenario</a>
+          </accordion-heading>
+          
+          <ol>
+            <li ng-repeat="step in scenario.steps">{{step}}</li>
+          </ol>
+        </accordion-group>
+
+      </accordion>
     
 
   </div>
 
-</div>
+
