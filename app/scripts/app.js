@@ -1,5 +1,5 @@
  'use strict';
-angular.module('jbehaveWebApp', ['ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap','ui.utils']).config(function($routeProvider) {
+angular.module('jbehaveWebApp', ['ngRoute', 'mgcrea.ngStrap', 'ui.bootstrap']).config(function($routeProvider) {
   return $routeProvider.when('/', {
     templateUrl: 'views/main.html',
     controller: 'StoryCtrl'
