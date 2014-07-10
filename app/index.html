@@ -20,18 +20,29 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <!-- Add your site or application content here -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="navbar navbar-default" role="navigation" bs-navbar>
-                    <ul class="nav navbar-nav">
-                        <li data-match-route="/"><a href="#/">Play</a></li>
-                        <li data-match-route="/build"><a href="#/build">Create</a></li>
-                        <li data-match-route="/configure"><a href="#/configure">Configure</a></li>
-                    </ul>
-                </div>
+
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+              </button>
+              <a class="navbar-brand" href="#">Testplatform - <strong>Lacent</strong></a>
             </div>
-            <div ng-view=""></div>
-        </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li data-match-route="/"><a href="#/">Play</a></li>
+                <li data-match-route="/build"><a href="#/build">Create</a></li>
+                <li data-match-route="/configure"><a href="#/configure">Configure</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+        <div ng-view="" class="paper-group"></div>
         <!--[if lt IE 9]>
         <script src="bower_components/es5-shim/es5-shim.js"></script>
         <script src="bower_components/json3/lib/json3.min.js"></script>

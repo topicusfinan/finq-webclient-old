@@ -1,25 +1,32 @@
 'use strict';
 angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter',
   function StoryCtrl($scope, $http) {
+    $scope.bundles = [];
     $scope.stories = [];
     $scope.scenarios = [];
+
+    $scope.selectedIndex = null;
+    $scope.isDone = '';
+    $scope.stepWord = 'Given';
+
 
     $scope.scenarioFilter = [];
 
       $http({
         method: 'GET',
-        url: 'http://192.168.42.65:8080/api/stories'
+        url: 'bundles-endpoint.json'
       }).
       success(function(data) {
-        $scope.stories = data;
-        console.log(data);
+        $scope.bundles = data;
+        $scope.stories = data[0].stories;
       });
 
 
-    $scope.setFilter = function() { 
-      $scope.scenarioFilter.push(this.id);
+    $scope.setFilter = function($name, $index) { 
+      $scope.isDone = 'done';
+      $scope.scenarioFilter = $name;
+      $scope.selectedIndex = $index;
     };
-    
 
     $scope.loadScenarios = function($index) { 
       $scope.scenarios = $scope.stories[$index].scenarios;
@@ -52,3 +59,9 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     };
   }
 ]);
+
+angular.module('jbehaveWebApp').filter('to_trusted', ['$scope', function($scope){
+    return function(text) {
+        return $scope.trustAsHtml(text);
+    };
+}]);
