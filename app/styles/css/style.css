@@ -48,34 +48,31 @@ h1, h2, h3 {
   z-index: 4;
 }
 .paper-group .paper.paper-one.done {
-  width: 75px;
+  width: 180px;
 }
 .paper-group .paper.paper-two {
   background-color: #6dc69c;
   z-index: 3;
-  padding-left: 90px;
+  padding-left: 195px;
 }
 .paper-group .paper.paper-two.done {
-  width: 255px;
+  width: 360px;
 }
 .paper-group .paper.paper-three {
   background-color: #80cda9;
   z-index: 2;
-  padding-left: 270px;
+  padding-left: 375px;
 }
 .paper-group .paper.paper-three.done {
-  width: 435px;
+  width: 540px;
 }
 .paper-group .paper.paper-four {
   background-color: #92d4b5;
   z-index: 1;
-  padding-left: 450px;
+  padding-left: 555px;
 }
 .paper-group .paper.paper-four.done {
-  width: 615px;
-}
-.paper-group .paper h3 {
-  color: #fff;
+  width: 720px;
 }
 
 .done-true {
@@ -99,15 +96,20 @@ h1, h2, h3 {
   margin-left: 15px;
 }
 
-.paper h3 {
+.paper h2 {
   text-overflow: ellipsis;
   overflow: hidden;
+  text-align: right;
+  font-size: 2.1em;
+  color: #fff;
+  text-transform: uppercase;
 }
 
 .list-group .list-group-item {
   border-radius: 0px;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 .list-group.circles .list-group-item {
   border-radius: 50px;

@@ -1,26 +1,13 @@
+
+
   <div class="paper paper-one done">
 
-  <h3>Domains</h3>
 
-  <div class="list-group circles">
-      
-        <a href="#" class="list-group-item active">LAC</a>
-
-        <a href="#" class="list-group-item">ING</a>
-
-        <a href="#" class="list-group-item">ABN</a>
-  </div>
-
-  </div>
-
-  <div class="paper paper-two done">
-
-
-    <h3>Bundles</h3>
+    <h2>Bundles</h2>
 
     <div class="list-group">
 
-          <a href class="list-group-item" ng-repeat="bundle in bundles" class="active">{{bundle.name}}</a>
+          <a href class="list-group-item active" ng-repeat="bundle in bundles">{{bundle.name}}</a>
 
     </div>
     
@@ -28,10 +15,10 @@
 
   </div>
 
-  <div class="paper paper-three" ng-class="isDone">
+  <div class="paper paper-two" ng-class="isDone">
 
 
-    <h3>Stories</h3>
+    <h2>Stories</h2>
 
     <div class="list-group">
 
@@ -47,14 +34,14 @@
 
   </div>
 
-  <div class="paper paper-four">
+  <div class="paper paper-three">
 
 
 
     
 
 
-    <h3>Scenarios</h3>
+    <h2>Scenarios</h2>
 
       <div class="form-group">
         <input type="search" class="form-control" ng-model="scenarioFilter" placeholder="Zoeken binnen scenario('s)" />
@@ -75,8 +62,10 @@
         <accordion-group ng-repeat="scenario in story.scenarios" id="{{scenario.id}}"  is-open="status.open">
           <accordion-heading>
             <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> {{scenario.title}} 
-            <a class="pull-right">Play scenario</a>
+            
           </accordion-heading>
+
+          <a class="pull-right" href>Play scenario</a>
           
           <ol>
             <li ng-repeat="step in scenario.steps">{{step}}</li>
