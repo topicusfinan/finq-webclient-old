@@ -1,6 +1,6 @@
 'use strict';
 angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter',
-  function StoryCtrl($scope, $http) {
+  function StoryCtrl($scope, $http, SocketService) {
     $scope.bundles = [];
     $scope.stories = [];
     $scope.scenarios = [];
@@ -22,13 +22,13 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
       });
 
 
-    $scope.setFilter = function($name, $index) { 
+    $scope.setFilter = function($name, $index) {
       $scope.isDone = 'done';
       $scope.scenarioFilter = $name;
       $scope.selectedIndex = $index;
     };
 
-    $scope.loadScenarios = function($index) { 
+    $scope.loadScenarios = function($index) {
       $scope.scenarios = $scope.stories[$index].scenarios;
     };
 
@@ -36,7 +36,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
 
       $http({
         method: 'POST',
-        url: 'http://192.168.42.65:8080/api/runner/story',
+        url: 'http://localhost:8080/api/runner/story',
         data: $storyid
       }).
       success(function(data){
@@ -47,12 +47,12 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     $scope.getStoryResponse = function($id, $storyid){
       $http({
         method: 'GET',
-        url: 'http://192.168.42.65:8080/api/status/'+$id,
+        url: 'http://localhost:8080/api/status/'+$id,
       }).
       success(function(data){
         for(var i =0; i<$scope.stories.length; i++){
           if($scope.stories[i].id === $storyid){
-            $scope.stories[i].status = data.status; 
+            $scope.stories[i].status = data.status;
           }
         }
       });
