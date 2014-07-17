@@ -5,16 +5,19 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     $scope.stories = [];
     $scope.scenarios = [];
 
-    $scope.selectedIndex = null;
-    $scope.isDone = '';
+    $scope.selectedBundleIndex = null;
+    $scope.selectedStoryIndex = null;
+
     $scope.stepWord = 'Given';
 
+    $scope.alerts = [];
 
+    $scope.storyFilter = [];
     $scope.scenarioFilter = [];
 
       $http({
         method: 'GET',
-        url: 'bundles-endpoint.json'
+        url: 'http://jenkins-slave1:8080/api/bundles'
       }).
       success(function(data) {
         $scope.bundles = data;
@@ -22,10 +25,32 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
       });
 
 
-    $scope.setFilter = function($name, $index) { 
-      $scope.isDone = 'done';
-      $scope.scenarioFilter = $name;
-      $scope.selectedIndex = $index;
+    $scope.setFilter = function($type,$name, $index) {
+      if($type === 'bundle'){
+        $scope.storyFilter = $name;
+        $scope.selectedBundleIndex = $index;
+      }
+      else if($type === 'story'){
+        $scope.scenarioFilter = $name;
+        $scope.selectedStoryIndex = $index;
+      }
+    };
+
+    $scope.getClass = function($status, $type) {
+      var cssClass;
+      if($type === 'text') {
+        switch($status) {
+          case 'FAILED':
+            cssClass = 'text-danger';
+            break;
+          case 'SUCCESS':
+            cssClass = 'text-success';
+            break;
+          default:
+            cssClass = 'text-muted';
+        } 
+      }
+      return cssClass;  
     };
 
     $scope.loadScenarios = function($index) { 
@@ -36,7 +61,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
 
       $http({
         method: 'POST',
-        url: 'http://192.168.42.65:8080/api/runner/story',
+        url: 'http://jenkins-slave1:8080/api/runner/story',
         data: $storyid
       }).
       success(function(data){
@@ -47,12 +72,16 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     $scope.getStoryResponse = function($id, $storyid){
       $http({
         method: 'GET',
-        url: 'http://192.168.42.65:8080/api/status/'+$id,
+        url: 'http://jenkins-slave1:8080/api/status/'+$id,
       }).
       success(function(data){
         for(var i =0; i<$scope.stories.length; i++){
           if($scope.stories[i].id === $storyid){
-            $scope.stories[i].status = data.status; 
+            $scope.stories[i].status = data.status;
+            $scope.stories[i].statusId = $id;
+            if(data.logs[0]) {
+              $scope.stories[i].logs = data.logs[0];
+            }
           }
         }
       });

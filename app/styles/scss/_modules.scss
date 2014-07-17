@@ -1,5 +1,15 @@
-.done-true {
-  color: green;
+.navbar.navbar-default {
+    margin-bottom: 0px;
+    background-color: $color-one;
+    border: none;
+    border-radius: 0px;
+    color: #fff;
+    .navbar-brand {
+        color: #fff;
+    }
+    li > a {
+        color: #fff;
+    }
 }
 
 .story-name {
@@ -22,8 +32,12 @@
         overflow: hidden;
         text-align: right;
         font-size: 2.1em;
-        color: #fff;
         text-transform: uppercase;
+    }
+    &.done {
+        h2 {
+            color: #fff;
+        }
     }
 }
 
@@ -33,6 +47,12 @@
         text-overflow: ellipsis;
         overflow: hidden;
         margin-bottom: 5px;
+        &.active {
+            background-color: $active-color;
+            &:hover, &:active, &:focus {    
+                background-color: $active-color;
+            }
+        }
     }
 
     &.circles {

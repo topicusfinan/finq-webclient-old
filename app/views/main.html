@@ -1,13 +1,13 @@
 
 
-  <div class="paper paper-one done">
+  <div class="paper paper-one" ng-class="{done: selectedBundleIndex != null}">
 
 
     <h2>Bundles</h2>
 
     <div class="list-group">
 
-          <a href class="list-group-item active" ng-repeat="bundle in bundles">{{bundle.name}}</a>
+          <a href class="list-group-item" ng-repeat="bundle in bundles" data-ng-click="setFilter('bundle',bundle.name, $index)" ng-class="{active: $index===selectedBundleIndex}">{{bundle.name}}</a>
 
     </div>
     
@@ -15,7 +15,7 @@
 
   </div>
 
-  <div class="paper paper-two" ng-class="isDone">
+  <div class="paper paper-two" ng-class="{done: selectedStoryIndex != null}">
 
 
     <h2>Stories</h2>
@@ -24,9 +24,9 @@
 
 
 
-          <a href class="list-group-item" data-ng-click="setFilter(null, -1)" ng-class="{active: selectedIndex===-1}">All</a>
+          <a href class="list-group-item" data-ng-click="setFilter('story',null, -1)" ng-class="{active: selectedStoryIndex===-1}">All</a>
         
-          <a href class="list-group-item" ng-repeat="story in stories" data-ng-click="setFilter(story.name, $index)" ng-class="{active: $index===selectedIndex}">{{story.name}}</a>
+          <a href class="list-group-item" ng-repeat="story in stories" data-ng-click="setFilter('story',story.name, $index)" ng-class="{active: $index===selectedStoryIndex}">{{story.name}}</a>
 
     </div>
     
@@ -50,25 +50,30 @@
 
         <div class="row">
           <div class="col-xs-9">
-            <h4>{{story.name}}</h4>
+            <h4>{{story.name}} <span class="label label-default" ng-class="{'label-danger': story.status === 'FAILED'}">{{story.status}}</span></h4>
           </div>
           <div class="col-xs-3 text-right">
 
-              <button class="btn btn-default"><span class="glyphicon glyphicon-play"></span> Play story</button>
+              <button class="btn btn-primary" ng-click="runStory(story.id)" ng-hide="story.status == 'RUNNING'"><span class="glyphicon glyphicon-play"></span> Play story</button> 
+              
+              <button class="btn btn-default" ng-hide="story.status != 'RUNNING'" ng-click="getStoryResponse(story.statusId,story.id)"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+              
 
           </div>
         </div>
         
         <accordion-group ng-repeat="scenario in story.scenarios" id="{{scenario.id}}"  is-open="status.open">
           <accordion-heading>
-            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> {{scenario.title}} 
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> 
+            {{scenario.title}} 
+            <span class="label label-default">{{story.logs.scenarioLogs[$index].status}}</span> 
             
           </accordion-heading>
 
           <a class="pull-right" href>Play scenario</a>
           
           <ol>
-            <li ng-repeat="step in scenario.steps">{{step}}</li>
+            <li ng-repeat="step in scenario.steps" ng-class="getClass(story.logs.scenarioLogs[$parent.$index].stepLogs[$index].status, 'text')">{{step}}</li>
           </ol>
         </accordion-group>
 

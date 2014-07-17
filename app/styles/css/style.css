@@ -43,40 +43,60 @@ h1, h2, h3 {
   top: 0px;
   bottom: 0px;
 }
+.paper-group .paper .list-group {
+  margin: 0px 10% 20px 10%;
+}
+.paper-group .paper.done .list-group {
+  margin: 0px 0px 20px 0px;
+}
 .paper-group .paper.paper-one {
-  background-color: #5bbf90;
+  background-color: #fff;
   z-index: 4;
 }
 .paper-group .paper.paper-one.done {
+  background-color: #00aeef;
   width: 180px;
 }
 .paper-group .paper.paper-two {
-  background-color: #6dc69c;
   z-index: 3;
+  background-color: #fff;
   padding-left: 195px;
 }
 .paper-group .paper.paper-two.done {
   width: 360px;
+  background-color: #009bd5;
 }
 .paper-group .paper.paper-three {
-  background-color: #80cda9;
   z-index: 2;
+  background-color: #fff;
   padding-left: 375px;
 }
 .paper-group .paper.paper-three.done {
   width: 540px;
+  background-color: #0089bc;
 }
 .paper-group .paper.paper-four {
-  background-color: #92d4b5;
+  background-color: #fff;
   z-index: 1;
   padding-left: 555px;
 }
 .paper-group .paper.paper-four.done {
   width: 720px;
+  background-color: #3dcaff;
 }
 
-.done-true {
-  color: green;
+.navbar.navbar-default {
+  margin-bottom: 0px;
+  background-color: #00275d;
+  border: none;
+  border-radius: 0px;
+  color: #fff;
+}
+.navbar.navbar-default .navbar-brand {
+  color: #fff;
+}
+.navbar.navbar-default li > a {
+  color: #fff;
 }
 
 .story-name {
@@ -101,8 +121,10 @@ h1, h2, h3 {
   overflow: hidden;
   text-align: right;
   font-size: 2.1em;
-  color: #fff;
   text-transform: uppercase;
+}
+.paper.done h2 {
+  color: #fff;
 }
 
 .list-group .list-group-item {
@@ -110,6 +132,12 @@ h1, h2, h3 {
   text-overflow: ellipsis;
   overflow: hidden;
   margin-bottom: 5px;
+}
+.list-group .list-group-item.active {
+  background-color: #2e549c;
+}
+.list-group .list-group-item.active:hover, .list-group .list-group-item.active:active, .list-group .list-group-item.active:focus {
+  background-color: #2e549c;
 }
 .list-group.circles .list-group-item {
   border-radius: 50px;
@@ -140,4 +168,8 @@ h1, h2, h3 {
   opacity: 0;
   top: -50px;
   height: 0px;
+}
+
+.done-true {
+  color: green;
 }

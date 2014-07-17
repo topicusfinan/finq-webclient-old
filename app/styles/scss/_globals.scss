@@ -5,5 +5,7 @@ $color-two: #00aeef;
 $color-three: #5bbf90;
 $color-four: #e75200;
 
+$active-color: #2e549c;
+
 @include font-face('Open Sans', '/../fonts/open-sans/OpenSans-Regular-webfont');
 @include font-face('Comfortaa Light', '/../fonts/comfortaa/Comfortaa-Light');
