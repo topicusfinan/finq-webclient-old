@@ -1,6 +1,6 @@
 'use strict';
-angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter',
-  function StoryCtrl($scope, $http, SocketService) {
+angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter', 'SocketService',
+  function StoryCtrl($scope, $http, filterFilter, SocketService) {
     $scope.bundles = [];
     $scope.stories = [];
     $scope.scenarios = [];
@@ -40,7 +40,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
         data: $storyid
       }).
       success(function(data){
-        $scope.getStoryResponse(data, $storyid);
+        $scope.getReportIdForStory(data, $storyid);
       });
     };
 
@@ -56,6 +56,17 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
           }
         }
       });
+    };
+
+    $scope.getReportIdForStory = function($id, $storyid){
+      console.log('getting reportid for story: ' + $id + ' - ' + $storyid);
+
+      // find the reportid to keep track of
+    };
+
+    $scope.subscribeToReport = function($reportId){
+      console.log('subscribing to report ' + $reportId);
+      SocketService.subscribeToReport($reportId);
     };
   }
 ]);

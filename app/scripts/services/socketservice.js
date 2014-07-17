@@ -7,10 +7,10 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
     // Create a unique callback ID to map requests to responses
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
-    var socket = new WebSocket("ws://localhost:8080/api/statusws");
+    var socket = new WebSocket('ws://localhost:8080/api/statusws');
 
     socket.onopen = function(){
-        console.log("Socket has been opened!");
+        console.log('Socket has been opened!');
     };
 
     socket.onmessage = function(message) {
@@ -32,7 +32,7 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
 
     function listener(data) {
       var messageObj = data;
-      console.log("Received data from websocket: ", messageObj);
+      console.log('Received data from websocket: ', messageObj);
       // If an object exists with callback_id in our callbacks object, resolve it
       if(callbacks.hasOwnProperty(messageObj.callback_id)) {
         console.log(callbacks[messageObj.callback_id]);
@@ -50,13 +50,14 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
     }
 
     SocketService.subscribeToReport = function($reportId) {
+      console.log('Subscribing to report: ' + $reportId);
       var request = {
         subscribe: + $reportId
       };
 
       var promise = sendRequest(request);
       return promise;
-    }
+    };
 
     return SocketService;
-}])
+}]);
