@@ -49,10 +49,9 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
       return currentCallbackId;
     }
 
-    SocketService.subscribeToReport = function($reportId) {
-      console.log('Subscribing to report: ' + $reportId);
+    SocketService.subscribeToReport = function(reportId) {
       var request = {
-        subscribe: + $reportId
+        subscribe: + reportId
       };
 
       var promise = sendRequest(request);

@@ -14,7 +14,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
 
       $http({
         method: 'GET',
-        url: 'bundles-endpoint.json'
+        url: 'http://localhost:8080/api/bundles'
       }).
       success(function(data) {
         $scope.bundles = data;
@@ -58,15 +58,17 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
       });
     };
 
-    $scope.getReportIdForStory = function($id, $storyid){
-      console.log('getting reportid for story: ' + $id + ' - ' + $storyid);
-
+    $scope.getReportIdForStory = function(data){
       // find the reportid to keep track of
+      var reponseData = JSON.stringify(data);
+      var parsedDate = JSON.parse(reponseData);
+
+      $scope.subscribeToReport(parsedDate.id);
     };
 
-    $scope.subscribeToReport = function($reportId){
-      console.log('subscribing to report ' + $reportId);
-      SocketService.subscribeToReport($reportId);
+    $scope.subscribeToReport = function(reportId){
+      console.log('Subscribing to report ' + reportId);
+      SocketService.subscribeToReport(reportId);
     };
   }
 ]);
