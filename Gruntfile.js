@@ -44,9 +44,13 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+      sass: {
+          files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+          tasks: ['sass:server', 'autoprefixer']
+      },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+          files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+          tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -294,6 +298,34 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
+    // Compiles Sass to CSS and generates necessary files if requested
+    sass: {
+        options: {
+            loadPath: [
+                'bower_components'
+            ]
+        },
+        dist: {
+            files: [{
+                expand: true,
+                cwd: '<%= yeoman.app %>/styles',
+                src: ['*.scss'],
+                dest: '.tmp/styles',
+                ext: '.css'
+            }]
+        },
+        server: {
+            files: [{
+                expand: true,
+                cwd: '<%= yeoman.app %>/styles',
+                src: ['*.scss'],
+                dest: '.tmp/styles',
+                ext: '.css'
+            }]
+        }
+    },
+
+
     ngconstant: {
     // Options for all targets
       options: {
@@ -354,12 +386,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'sass:server',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'sass',
         'copy:styles',
         'imagemin',
         'svgmin'

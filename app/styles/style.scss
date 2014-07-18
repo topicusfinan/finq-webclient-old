@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "Open Sans";
+  font-weight: normal;
+  font-style: normal;
+  src: url("/../fonts/open-sans/OpenSans-Regular-webfont.eot");
+  src: url("/../fonts/open-sans/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("/../fonts/open-sans/OpenSans-Regular-webfont.woff") format("woff"), url("/../fonts/open-sans/OpenSans-Regular-webfont.ttf") format("truetype"), url("/../fonts/open-sans/OpenSans-Regular-webfont.svg#Open Sans") format("svg");
+}
+
+@font-face {
+  font-family: "Comfortaa Light";
+  font-weight: normal;
+  font-style: normal;
+  src: url("/../fonts/comfortaa/Comfortaa-Light.eot");
+  src: url("/../fonts/comfortaa/Comfortaa-Light.eot?#iefix") format("embedded-opentype"), url("/../fonts/comfortaa/Comfortaa-Light.woff") format("woff"), url("/../fonts/comfortaa/Comfortaa-Light.ttf") format("truetype"), url("/../fonts/comfortaa/Comfortaa-Light.svg#Comfortaa Light") format("svg");
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  font-family: "Open Sans",Verdana;
+}
+
+h1, h2, h3 {
+  font-family: "Comfortaa Light",Verdana;
+}
+
+.paper-group {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+}
+.paper-group .paper {
+  position: absolute;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  box-shadow: inset 5px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  padding: 15px;
+  top: 0px;
+  bottom: 0px;
+}
+.paper-group .paper.paper-one {
+  background-color: #5bbf90;
+  z-index: 4;
+}
+.paper-group .paper.paper-one.done {
+  width: 180px;
+}
+.paper-group .paper.paper-two {
+  background-color: #6dc69c;
+  z-index: 3;
+  padding-left: 195px;
+}
+.paper-group .paper.paper-two.done {
+  width: 360px;
+}
+.paper-group .paper.paper-three {
+  background-color: #80cda9;
+  z-index: 2;
+  padding-left: 375px;
+}
+.paper-group .paper.paper-three.done {
+  width: 540px;
+}
+.paper-group .paper.paper-four {
+  background-color: #92d4b5;
+  z-index: 1;
+  padding-left: 555px;
+}
+.paper-group .paper.paper-four.done {
+  width: 720px;
+}
+
+.done-true {
+  color: green;
+}
+
+.story-name {
+  border-bottom: 1px solid gray;
+}
+
+.story-name span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+.sidebar-menu li ul {
+  margin-left: 15px;
+}
+
+.paper h2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: right;
+  font-size: 2.1em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.list-group .list-group-item {
+  border-radius: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.list-group.circles .list-group-item {
+  border-radius: 50px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.animate-enter,
+.animate-leave {
+  -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  position: relative;
+  display: block;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+  opacity: 1;
+  top: 0;
+  height: 30px;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+  opacity: 0;
+  top: -50px;
+  height: 0px;
+}
