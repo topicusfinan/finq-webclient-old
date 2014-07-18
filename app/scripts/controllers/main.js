@@ -1,26 +1,22 @@
 'use strict';
-angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter', 'SocketService',
-  function StoryCtrl($scope, $http, filterFilter, SocketService) {
+angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'filterFilter','endPoint', 'SocketService',
+  function StoryCtrl($scope, $http, filterFilter, endPoint, SocketService) {
     $scope.bundles = [];
     $scope.stories = [];
     $scope.scenarios = [];
-
     $scope.selectedIndex = null;
     $scope.isDone = '';
     $scope.stepWord = 'Given';
-
-
     $scope.scenarioFilter = [];
 
-      $http({
-        method: 'GET',
-        url: 'http://localhost:8080/api/bundles'
-      }).
-      success(function(data) {
-        $scope.bundles = data;
-        $scope.stories = data[0].stories;
-      });
-
+    $http({
+      method: 'GET',
+      url: endPoint+'/api/bundles'
+    }).
+    success(function(data) {
+      $scope.bundles = data;
+      $scope.stories = data[0].stories;
+    });
 
     $scope.setFilter = function($name, $index) {
       $scope.isDone = 'done';
@@ -36,7 +32,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
 
       $http({
         method: 'POST',
-        url: 'http://localhost:8080/api/runner/story',
+        url: endPoint+'/api/runner/story',
         data: $storyid
       }).
       success(function(data){
@@ -47,7 +43,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     $scope.getStoryResponse = function($id, $storyid){
       $http({
         method: 'GET',
-        url: 'http://localhost:8080/api/status/'+$id,
+        url: endPoint+'api/status/'+$id,
       }).
       success(function(data){
         for(var i =0; i<$scope.stories.length; i++){
