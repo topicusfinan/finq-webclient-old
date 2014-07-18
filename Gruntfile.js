@@ -294,6 +294,26 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
+    ngconstant: {
+    // Options for all targets
+      options: {
+        space: '  ',
+        wrap: '"use strict";\n\n {%= __ngModule %}',
+        name: 'config',
+        dest: '<%= yeoman.app %>/scripts/config.js'
+      },
+      // Environment targets
+      development: {
+        constants: {
+          endPoint: 'http://jenkins-slave1.finan.local:8080'
+        }
+      },
+      local: {
+        constants: {
+          endPoint: 'http://localhost:8080'
+        }
+      }
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -361,8 +381,14 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
+    var constantEnvironment = 'ngconstant:development';
+    if(target === 'local'){
+      constantEnvironment = 'ngconstant:local';
+    }
+
     grunt.task.run([
       'clean:server',
+      constantEnvironment,
       'wiredep',
       'concurrent:server',
       'autoprefixer',
