@@ -24,7 +24,7 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
         time: new Date(),
         cb:defer
       };
-      request.callback_id = callbackId;
+      request.callbackIdentification = callbackId;
       console.log('Sending request', request);
       socket.send(JSON.stringify(request));
       return defer.promise;
@@ -33,10 +33,10 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
     function listener(data) {
       var messageObj = data;
       console.log('Received data from websocket: ', messageObj);
-      // If an object exists with callback_id in our callbacks object, resolve it
-      if(callbacks.hasOwnProperty(messageObj.callback_id)) {
-        console.log(callbacks[messageObj.callback_id]);
-        $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj.data));
+      // If an object exists with callbackIdentification in our callbacks object, resolve it
+      if(callbacks.hasOwnProperty(messageObj.callbackIdentification)) {
+        console.log(callbacks[messageObj.callbackIdentification]);
+        $rootScope.$apply(callbacks[messageObj.callbackIdentification].cb.resolve(messageObj.data));
         delete callbacks[messageObj.callbackID];
       }
     }
