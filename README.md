@@ -6,6 +6,7 @@ To develop you must have the following tools installed and added to you PATH var
 ```
 Nodejs (NPM)
 Git
+Sass (Ruby)
 ```
 
 Install
