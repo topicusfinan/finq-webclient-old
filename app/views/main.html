@@ -1,7 +1,7 @@
-<div class="paper paper-one done">
+<div class="paper paper-one done" ng-init="loadBundles()">
   <h2>Bundles</h2>
   <div class="list-group">
-    <a href class="list-group-item active" ng-repeat="bundle in bundles">{{bundle.name}}</a>
+    <a href class="list-group-item active" ng-repeat="bundle in bundles" ng-click="setActiveBundle($index)">{{bundle.name}}</a>
   </div>
 </div>
 <div class="paper paper-two" ng-class="isDone">
