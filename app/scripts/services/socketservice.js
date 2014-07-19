@@ -18,44 +18,18 @@ angular.module('jbehaveWebApp').factory('SocketService', ['$q', '$rootScope', fu
     };
 
     function sendRequest(request) {
-      var defer = $q.defer();
-      var callbackId = getCallbackId();
-      callbacks[callbackId] = {
-        time: new Date(),
-        cb:defer
-      };
-      request.callbackIdentification = callbackId;
-      console.log('Sending request', request);
-      socket.send(JSON.stringify(request));
-      return defer.promise;
+      socket.send(request);
     }
 
     function listener(data) {
       var messageObj = data;
       console.log('Received data from websocket: ', messageObj);
-      // If an object exists with callbackIdentification in our callbacks object, resolve it
-      if(callbacks.hasOwnProperty(messageObj.callbackIdentification)) {
-        console.log(callbacks[messageObj.callbackIdentification]);
-        $rootScope.$apply(callbacks[messageObj.callbackIdentification].cb.resolve(messageObj.data));
-        delete callbacks[messageObj.callbackID];
-      }
-    }
-    // This creates a new callback ID for a request
-    function getCallbackId() {
-      currentCallbackId += 1;
-      if(currentCallbackId > 10000) {
-        currentCallbackId = 0;
-      }
-      return currentCallbackId;
     }
 
     SocketService.subscribeToReport = function(reportId) {
-      var request = {
-        subscribe: + reportId
-      };
+      var request = "subscribe: "+reportId;
 
-      var promise = sendRequest(request);
-      return promise;
+      sendRequest(request);
     };
 
     return SocketService;
