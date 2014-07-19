@@ -27,7 +27,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endP
 
     $scope.setActiveBundle = function(bundleId){
       $scope.stories = $scope.bundles[bundleId].stories;
-    }
+    };
 
     $scope.runStory = function($storyid){
 
@@ -44,6 +44,6 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endP
     function subscribeToReport(reportId){
       console.log('Subscribing to report ' + reportId);
       SocketService.subscribeToReport(reportId);
-    };
+    }
   }
 ]);
