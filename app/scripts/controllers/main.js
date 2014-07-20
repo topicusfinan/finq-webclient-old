@@ -1,6 +1,6 @@
 'use strict';
-angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endPoint', 'SocketService',
-  function StoryCtrl($scope, $http, endPoint, SocketService) {
+angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','environmentFactory', 'SocketService',
+  function StoryCtrl($scope, $http, environmentFactory, SocketService) {
 
     $scope.bundles = [];
     $scope.stories = [];
@@ -11,7 +11,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endP
     $scope.loadBundles = function(){
       $http({
         method: 'GET',
-        url: endPoint+'/api/bundles'
+        url: environmentFactory.getHttpUrl()+'/api/bundles'
       }).
       success(function(data) {
         $scope.bundles = data;
@@ -33,7 +33,7 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endP
 
       $http({
         method: 'POST',
-        url: endPoint+'/api/runner/story',
+        url: environmentFactory.getHttpUrl()+'/api/runner/story',
         data: $storyid
       }).
       success(function(data){
@@ -42,7 +42,6 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','endP
     };
 
     function subscribeToReport(reportId){
-      console.log('Subscribing to report ' + reportId);
       SocketService.subscribeToReport(reportId);
     }
   }
