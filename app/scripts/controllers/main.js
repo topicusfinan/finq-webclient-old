@@ -37,18 +37,17 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
     };
 
     $scope.getClass = function($status, $type) {
-      var cssClass;
-      if($type === 'text') {
-        switch($status) {
-          case 'FAILED':
-            cssClass = 'text-danger';
-            break;
-          case 'SUCCESS':
-            cssClass = 'text-success';
-            break;
-          default:
-            cssClass = 'text-muted';
-        } 
+      var cssClass = $type;
+      
+      switch($status) {
+        case 'FAILED':
+          cssClass += '-danger';
+          break;
+        case 'SUCCESS':
+          cssClass += '-success';
+          break;
+        default:
+          cssClass += '-default';
       }
       return cssClass;  
     };
@@ -69,16 +68,17 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http', 'fil
       });
     };
 
-    $scope.getStoryResponse = function($id, $storyid){
+    $scope.getStoryResponse = function($statusid, $storyid){
+      console.log($statusid);
       $http({
         method: 'GET',
-        url: 'http://jenkins-slave1:8080/api/status/'+$id,
+        url: 'http://jenkins-slave1:8080/api/status/'+$statusid,
       }).
       success(function(data){
         for(var i =0; i<$scope.stories.length; i++){
           if($scope.stories[i].id === $storyid){
             $scope.stories[i].status = data.status;
-            $scope.stories[i].statusId = $id;
+            $scope.stories[i].statusId = $statusid;
             if(data.logs[0]) {
               $scope.stories[i].logs = data.logs[0];
             }
