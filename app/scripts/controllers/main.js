@@ -1,12 +1,15 @@
 'use strict';
-angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','environmentFactory', 'SocketService',
-  function StoryCtrl($scope, $http, environmentFactory, SocketService) {
+angular.module('jbehaveWebApp').controller('StoryCtrl', ['$rootScope', '$scope', '$http', 'environmentFactory', 'SocketService',
+  function StoryCtrl($rootScope, $scope, $http, environmentFactory, SocketService) {
 
     $scope.bundles = [];
     $scope.stories = [];
     $scope.selectedIndex = null;
     $scope.isDone = '';
     $scope.scenarioFilter = [];
+    $scope.storyStatus = '';
+    // $scope.scenarioStatus = '';
+    // $scope.stepStatus = '';
 
     $scope.loadBundles = function(){
       $http({
@@ -44,5 +47,12 @@ angular.module('jbehaveWebApp').controller('StoryCtrl', ['$scope', '$http','envi
     function subscribeToReport(reportId){
       SocketService.subscribeToReport(reportId);
     }
+
+    $rootScope.$on('statusChangeEvent', function updateStatus(){
+      $scope.$apply(function(){
+        var statusData = SocketService.getStatus();
+        $scope.storyStatus = statusData.log.status;
+      });
+    });
   }
 ]);

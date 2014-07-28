@@ -1,9 +1,11 @@
 'use strict';
-angular.module('jbehaveWebApp').factory('SocketService', [ 'environmentFactory', function(environmentFactory) {
+angular.module('jbehaveWebApp').factory('SocketService', [ 'environmentFactory', '$rootScope', function(environmentFactory, $rootScope) {
 	    // We return this object to anything injecting our service
     var SocketService = {};
     // Create our websocket object with the address to the websocket
     var socket = new WebSocket(environmentFactory.getWebsocketUrl()+'/api/statusws');
+
+    var statusData;
 
     socket.onopen = function(){
         console.log('Socket has been opened!');
@@ -18,14 +20,19 @@ angular.module('jbehaveWebApp').factory('SocketService', [ 'environmentFactory',
     }
 
     function listener(data) {
-      var messageObj = data;
-      console.log('Received data from websocket: ', messageObj);
+      console.log('Received data from websocket: ', data);
+      statusData = data;
+      $rootScope.$broadcast('statusChangeEvent');
     }
 
     SocketService.subscribeToReport = function(reportId) {
       var request = 'subscribe: '+reportId;
 
       sendRequest(request);
+    };
+
+    SocketService.getStatus = function() {
+      return statusData;
     };
 
     return SocketService;

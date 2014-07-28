@@ -19,7 +19,7 @@
   <accordion close-others="oneAtATime" ng-animate="'animate'" ng-repeat="story in stories | filter:scenarioFilter" id="{{story.id}}">
     <div class="row">
       <div class="col-xs-9">
-        <h4>{{story.name}}</h4>
+        <h4>{{story.name}} {{storyStatus}}</h4>
       </div>
       <div class="col-xs-3 text-right">
         <button class="btn btn-default" ng-click="runStory(story.id)"><span class="glyphicon glyphicon-play"></span> Play story</button>
