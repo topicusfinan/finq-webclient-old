@@ -337,12 +337,12 @@ module.exports = function (grunt) {
       // Environment targets
       development: {
         constants: {
-          endPoint: 'http://jenkins-slave1.finan.local:8080'
+          endPoint: 'jenkins-slave1.finan.local:8080'
         }
       },
       local: {
         constants: {
-          endPoint: 'http://localhost:8080'
+          endPoint: 'localhost:8080'
         }
       }
     },
