@@ -22,7 +22,7 @@ angular.module('jbehaveWebApp').factory('SocketService', [ 'environmentFactory',
     function listener(data) {
       console.log('Received data from websocket: ', data);
       statusData = data;
-      $rootScope.$broadcast('statusChangeEvent');
+      $rootScope.$emit('statusChangeEvent');
     }
 
     SocketService.subscribeToReport = function(reportId) {
